@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+	    <!--**********************************************************************************************************************************
+		    Vistas 
+	    ***********************************************************************************************************************************-->
+
+        <record id="vista_formulario_entidad" model="ir.ui.view">
+		    <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="name">res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <field name="name" position="replace">
+                    <group col="8" colspan="4">
+                        <group colspan="7" col="8" >
+                            <group colspan="8" attrs="{'invisible':[('empresa','=',1)]}">
+                                <field name="nombre" on_change="onchange_nomyapel(nombre,apellidos)" attrs="{'required':[('empresa','=',0)]}" />
+                                <field name="apellidos" on_change="onchange_nomyapel(nombre,apellidos)" attrs="{'required':[('empresa','=',0)]}" />
+                            </group>
+                            <newline />
+                            <group colspan="8" col="6" attrs="{'invisible':[('empresa','=',0)]}" >
+                                <field name="name" colspan="4" />
+    							<!--<field name="vat" />-->
+                            </group>
+                            <newline />
+                                <field name="empresa" on_change="onchange_empresa(empresa)" />
+	    						<field name="dni" on_change="onchange_checkdni(dni)" attrs="{'invisible':[('empresa','=',1)]}" />
+	    						<field name="lang" colspan="3" />
+                        </group>
+                    </group>
+                </field>
+            </field>
+        </record>
+
+	</data>
+</openerp>
